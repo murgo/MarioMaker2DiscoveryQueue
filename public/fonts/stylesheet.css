@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'Super Mario Maker';
+    src: url('Super-Mario-Maker.woff2') format('woff2'),
+        url('Super-Mario-Maker.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Super Mario Maker Extended';
+    src: url('Super-Mario-Maker-Extended.woff2') format('woff2'),
+        url('Super-Mario-Maker-Extended.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

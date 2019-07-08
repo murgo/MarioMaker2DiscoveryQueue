@@ -1,0 +1,80 @@
+<body>
+        <h1>Welcome to unofficial Mario Maker 2 Discovery Queue / Level Exchange!</h1>
+        <div class="content">
+            <div class="left">
+            <p>
+                Getting no plays for your levels? Submit your course, play some other courses to get coins, and spend coins to bump your submitted levels higher in the Unofficial MM2 Discovery Queue!
+            </p>
+            {{> playCourse }}
+            {{> submitCourse }}
+            {{> submittedCourses }}
+            <p class="footer">
+                This site is not affiliated with Nintendo in any way. Source code available <a href="github">here</a>.
+            </p>
+
+            </div>
+            <div class="right">
+            {{> queue }}
+            </div>
+        </div>
+    </body>
+    
+    <template name="submitCourse">
+        <div class="box">
+            <h2>Submit course for queue</h2>
+            <p>
+                <form class="new-submit">
+                    Level code: <input type="text" name="levelCode" placeholder="ABC-DEF-GHI" /> <br>
+                    Level style (for verification):  <br>
+                    <input type="radio" name="style" value="smb1">Super Mario Bros. 1<br>
+                    <input type="radio" name="style" value="smb3">Super Mario Bros. 3<br>
+                    <input type="radio" name="style" value="smw">Super Mario World<br>
+                    <input type="radio" name="style" value="nsmb">New Super Mario Bros.<br>
+                    <input type="radio" name="style" value="sm3dw">Super Mario 3D World<br>
+                    <input type="submit" name="submit" />
+                </form>
+            </p>
+        </div>
+    </template>
+    
+    <template name="playCourse">
+        <div class="box">
+            <h2>Play course</h2>
+            <button>Click here to reserve course for playing!</button>
+            Reserved course: 1) Did you find the stage? Yes/no  2) Verify you played the stage
+        </div>
+    </template>
+    
+    <template name="queue">
+        <div>
+            Level Queue:
+                {{#each tickets}}
+                    {{> queuedCourse}}
+                {{/each}}
+        </div>
+    </template> 
+    
+    <template name="queuedCourse">
+        <div class="queue-course">
+            <img src="/images/map-blip.png"> <span class="ticket-small">{{levelCode}} <img src="/images/coins-small.png"> {{coins}} </span>
+        </div>
+    </template> 
+        
+    <template name="submittedCourses">
+        {{#if submittedCourses}}
+        <div class="box">
+            <h2>Submitted courses</h2>
+            {{#each submittedCourses}}
+                {{> submittedCourse}}
+            {{/each}}
+        </div>
+        {{/if}}
+    </template>
+        
+    <template name="submittedCourse">
+        <div class="submitted-course">
+            <p>Level Code: {{levelCode}}</p>
+            <p>Coins spent:<img src="/images/coins-small.png"> {{coins}} <button>Spend coin!</button> </p>
+        </div>
+    </template> 
+        

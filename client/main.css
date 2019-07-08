@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'Super Mario Maker Extended';
+  src: url('/fonts/Super-Mario-Maker-Extended.ttf'),
+    url('Super-Mario-Maker-Extended.woff2') format('woff2'),
+    url('Super-Mario-Maker-Extended.woff') format('woff');
+}
+
+body {
+  padding: 10px;
+  font-family: sans-serif;
+  background-color: #FACD00;
+
+  font-family: 'Super Mario Maker Extended';
+  font-weight: normal;
+  font-style: normal;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.left {
+  flex-grow: 1;
+  min-width: 200px;
+  max-width: 800px;
+}
+
+.right {
+  flex-grow: 0.25;
+  min-width: 180px;
+}
+
+.box
+{
+  border-radius: 25px;
+  background: white;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: black 5px 5px 0px;
+}
+
+.queue-course {
+  font-size: 12px;
+}
+
+.ticket-small
+{
+  background: url('/images/ticket-small.png') no-repeat center center;
+  background-size: 100% 19px;
+  margin: 2px;
+  padding: 4px;
+  padding-left: 16px;
+}
+
+img {
+  vertical-align: middle;
+}
+
+.submitted-course {
+  border-radius: 10px;
+  background: #FACD00;
+  margin: 5px;
+  padding: 5px;
+  box-shadow: black 3px 3px 0px;
+}
+
+.submitted-course p {
+  margin: 0px;
+}
+
+.submitted-course img {
+  margin-left: 10px;
+}
