@@ -1,5 +1,6 @@
 <body>
         <h1>Welcome to unofficial Mario Maker 2 Discovery Queue / Level Exchange!</h1>
+        {{> sAlert}}
         <div class="content">
             <div class="left">
             <p>
@@ -9,12 +10,13 @@
             {{> submitCourse }}
             {{> submittedCourses }}
             <p class="footer">
-                This site is not affiliated with Nintendo in any way. Source code available <a href="github">here</a>.
+                This site is not affiliated with Nintendo in any way. Source code available <a href="https://github.com/murgo/MarioMaker2DiscoveryQueue/">here</a>.
             </p>
 
             </div>
             <div class="right">
-            {{> queue }}
+                    {{> profile }}
+                    {{> queue }}
             </div>
         </div>
     </body>
@@ -26,11 +28,11 @@
                 <form class="new-submit">
                     Level code: <input type="text" name="levelCode" placeholder="ABC-DEF-GHI" /> <br>
                     Level style (for verification):  <br>
-                    <input type="radio" name="style" value="smb1">Super Mario Bros. 1<br>
-                    <input type="radio" name="style" value="smb3">Super Mario Bros. 3<br>
-                    <input type="radio" name="style" value="smw">Super Mario World<br>
-                    <input type="radio" name="style" value="nsmb">New Super Mario Bros.<br>
-                    <input type="radio" name="style" value="sm3dw">Super Mario 3D World<br>
+                    <input type="radio" name="levelStyle" value="smb1">Super Mario Bros. 1<br>
+                    <input type="radio" name="levelStyle" value="smb3">Super Mario Bros. 3<br>
+                    <input type="radio" name="levelStyle" value="smw">Super Mario World<br>
+                    <input type="radio" name="levelStyle" value="nsmb">New Super Mario Bros.<br>
+                    <input type="radio" name="levelStyle" value="sm3dw">Super Mario 3D World<br>
                     <input type="submit" name="submit" />
                 </form>
             </p>
@@ -38,19 +40,27 @@
     </template>
     
     <template name="playCourse">
+        {{#if hasReservedCourse}}
+        <div class="box">
+            <h2>Course reserved!</h2>
+            <p>Level Code: <span class="levelCode">{{levelCode}}</span></p>
+            Reserved course: 1) Did you find the stage? Yes/no  2) Verify you played the stage
+        </div>
+        {{else}}
         <div class="box">
             <h2>Play course</h2>
             <button>Click here to reserve course for playing!</button>
             Reserved course: 1) Did you find the stage? Yes/no  2) Verify you played the stage
         </div>
+        {{/if}}
     </template>
     
     <template name="queue">
-        <div>
-            Level Queue:
-                {{#each tickets}}
-                    {{> queuedCourse}}
-                {{/each}}
+        <div class="box queue">
+            <h3>Queue</h3>
+            {{#each tickets}}
+                {{> queuedCourse}}
+            {{/each}}
         </div>
     </template> 
     
@@ -73,7 +83,7 @@
         
     <template name="submittedCourse">
         <div class="submitted-course">
-            <p>Level Code: {{levelCode}}</p>
+            <p>Level Code: <span class="levelCode">{{levelCode}}</span></p>
             <p>Coins spent:<img src="/images/coins-small.png"> {{coins}} <button>Spend coin!</button> </p>
         </div>
     </template> 
