@@ -1,10 +1,11 @@
 import { Template } from 'meteor/templating';
+import { IsLoggedIn } from "./profile.js";
 
 import './playcourse.html';
 
 Template.playCourse.helpers({
     hasReservedCourse() {
-        if (!isLoggedIn()) {
+        if (!IsLoggedIn()) {
             return false;
         }
 
@@ -15,5 +16,16 @@ Template.playCourse.helpers({
 
         let courseId = userData.reservedCourseId;
         return courseId != null;
+    },
+});
+
+Template.playCourse.events({
+    'click .play-button'(event, instance) {
+        // Prevent default browser form submit
+        event.preventDefault();
+     
+        if (!IsLoggedIn(true)) {
+            return;
+        }
     },
 });

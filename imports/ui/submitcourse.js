@@ -1,23 +1,26 @@
 import { Template } from 'meteor/templating';
 import { Tickets, TicketStates } from '../api/tickets.js';
+import { ReactiveDict } from 'meteor/reactive-dict';
+import { IsLoggedIn, ErrorHandler } from "./profile.js";
 
 import './submitcourse.html';
 
-Template.submittedCourses.helpers({
-    submittedCourses() {
-        if (!isLoggedIn()) {
-            return null;
-        }
-        return Tickets.find({createdBy: Meteor.userId()}, {sort: { createdAt: -1 }});
+Template.submitCourse.onCreated(function bodyOnCreated() {
+    this.state = new ReactiveDict();
+});
+
+Template.submitCourse.helpers({
+    isSubmitting() {
+        return Template.instance().state.get('showSubmitCourse');
     },
 });
 
-Template.submittedCourses.events({
+Template.submitCourse.events({
     'submit .new-submit'(event) {
         // Prevent default browser form submit
         event.preventDefault();
      
-        if (!isLoggedIn(true)) {
+        if (!IsLoggedIn(true)) {
             return;
         }
         console.log("Submitting course...");
@@ -32,10 +35,30 @@ Template.submittedCourses.events({
         target.reset();
      
         // Insert a task into the collection
-        Meteor.call('tickets.insert', levelCode, levelStyle, errorHandler('Course submitted!'));
+        Meteor.call('tickets.insert', levelCode, levelStyle, ErrorHandler('Course submitted!'));
 
         console.log("Course submission sent...");
-      },
+    },
+
+    'click .play-button'(event, instance) {
+        // Prevent default browser form submit
+        event.preventDefault();
+     
+        if (!IsLoggedIn(true)) {
+            return;
+        }
+
+        instance.state.set('showSubmitCourse', true);
+    },
+});
+
+Template.submittedCourses.helpers({
+    submittedCourses() {
+        if (!IsLoggedIn()) {
+            return null;
+        }
+        return Tickets.find({createdBy: Meteor.userId()}, {sort: { createdAt: -1 }});
+    },
 });
 
 Template.submittedCourse.events({
@@ -43,10 +66,10 @@ Template.submittedCourse.events({
         // Prevent default browser form submit
         event.preventDefault();
 
-        if (!isLoggedIn(true)) {
+        if (!IsLoggedIn(true)) {
             return;
         }
 
-        Meteor.call('tickets.addCoin', this._id, errorHandler());
+        Meteor.call('tickets.addCoin', this._id, ErrorHandler());
       },
 });
