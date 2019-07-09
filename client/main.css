@@ -27,7 +27,7 @@ body {
 
 .right {
   flex-grow: 0.25;
-  min-width: 200px;
+  min-width: 210px;
   max-width: 250px;
 }
 
@@ -101,4 +101,9 @@ h1, h2, h3, h4 {
 .play-box {
   display:flex;
   justify-content: center;
+}
+
+.levelcode-small {
+  display: inline-block;
+  width: 90px;
 }
