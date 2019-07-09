@@ -1,0 +1,14 @@
+<template name="queue">
+    <div class="box queue">
+        <h3>Queue</h3>
+        {{#each tickets}}
+            {{> queuedCourse}}
+        {{/each}}
+    </div>
+</template> 
+
+<template name="queuedCourse">
+    <div class="queue-course">
+        {{#if isReserved }} <img src="/images/mario.gif"> {{else}} <img src="/images/map-blip.png"> {{/if}} <span class="ticket-small">{{levelCode}} <img src="/images/coins-small.png"> {{coins}} </span>
+    </div>
+</template> 

@@ -1,0 +1,15 @@
+<template name="playCourse">
+    {{#if hasReservedCourse}}
+    <div class="box">
+        <h2>Course reserved!</h2>
+        <p>Level Code: <span class="levelCode">{{levelCode}}</span></p>
+    </div>
+    {{else}}
+    <div class="box">
+        <h2>Play course</h2>
+        <div class="play-box">
+            <button class="play-button">Click here to play a course from the queue!</button>
+        </div>
+    </div>
+    {{/if}}
+</template>

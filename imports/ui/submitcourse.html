@@ -1,0 +1,50 @@
+<template name="submitCourse">
+    <div class="box">
+        <h2>Submit course for queue</h2>
+        {{#if isSubmitting}}
+        <p>
+            <form class="new-submit">
+                Level code: <input type="text" name="levelCode" placeholder="ABC-DEF-GHI" /> <br>
+                Level style (for verification):  <br>
+                <!--
+                <input type="radio" name="levelStyle" value="smb1">Super Mario Bros. 1<br>
+                <input type="radio" name="levelStyle" value="smb3">Super Mario Bros. 3<br>
+                <input type="radio" name="levelStyle" value="smw">Super Mario World<br>
+                <input type="radio" name="levelStyle" value="nsmb">New Super Mario Bros.<br>
+                <input type="radio" name="levelStyle" value="sm3dw">Super Mario 3D World<br>
+                -->
+                <select name="levelStyle">
+                    <option value="smb1">Super Mario Bros. 1</option>
+                    <option value="smb3">Super Mario Bros. 3</option>
+                    <option value="smw">Super Mario World</option>
+                    <option value="nsmb">New Super Mario Bros.</option>
+                    <option value="sm3dw">Super Mario 3D World</option>
+                </select>
+                <input type="submit" name="submit" />
+            </form>
+        </p>
+        {{else}}
+        <div class="play-box">
+            <button class="play-button">Click here to submit a new course to the queue!</button>
+        </div>
+        {{/if}}
+    </div>
+</template>
+
+<template name="submittedCourses">
+    {{#if submittedCourses}}
+    <div class="box">
+        <h2>Submitted courses</h2>
+        {{#each submittedCourses}}
+            {{> submittedCourse}}
+        {{/each}}
+    </div>
+    {{/if}}
+</template>
+        
+<template name="submittedCourse">
+    <div class="submitted-course">
+        <p>Level Code: <span class="levelCode">{{levelCode}}</span></p>
+        <p>Coins spent:<img src="/images/coins-small.png"> {{coins}} <button>Spend coin!</button> </p>
+    </div>
+</template>

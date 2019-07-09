@@ -7,7 +7,6 @@
 
 body {
   padding: 10px;
-  font-family: sans-serif;
   background-color: #FACD00;
 
   font-family: 'Super Mario Maker Extended';
@@ -51,7 +50,8 @@ body {
   background-size: 100% 19px;
   margin: 2px;
   padding: 4px;
-  padding-left: 16px;
+  padding-left: 10px;
+  width: 128px;
 }
 
 img {
@@ -85,4 +85,20 @@ h1, h2, h3, h4 {
 .right .box {
   border-radius: 8px;
   box-shadow: black 3px 3px 0px;
+}
+
+.play-button {
+  width: 200px;
+  height: 100px;
+  text-align: center;
+  border-radius: 10px;
+
+  font-family: 'Super Mario Maker Extended';
+  font-weight: normal;
+  font-style: normal;
+}
+
+.play-box {
+  display:flex;
+  justify-content: center;
 }
