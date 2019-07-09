@@ -1,14 +1,6 @@
 <template name="profile">
     <div class="profile box">
         <h3>Profile</h3>
-        {{> loginButtons align="right"}}
-
-        <div>
-        {{#if currentUser}}
-            Signed in as: {{currentUser.username}}
-        {{else}}
-            Not signed in.
-        {{/if}}
-        </div>
+        {{> loginButtons align="right"}} {{#if currentUser}} <img src="/images/coins-small.png"> {{coins}} {{/if}}
     </div>
 </template>

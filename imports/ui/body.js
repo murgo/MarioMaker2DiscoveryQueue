@@ -4,6 +4,18 @@ import { Tickets, TicketStates } from '../api/tickets.js';
 import './body.html';
 import './profile.js';
 
+function errorHandler(successText) {
+    return function(err) {
+        if (err) {
+            console.log(err);
+            sAlert.error(err.error);
+        } else if (successText) {
+            sAlert.success(successText);
+        }
+    };
+}
+
+
 function isLoggedIn(reportFailure = false) {
     var loggedIn = (Meteor.userId() != null);
     if (reportFailure && !loggedIn) {
@@ -17,6 +29,12 @@ Template.queue.helpers({
         return Tickets.find({}, {sort: { coins: -1, createdAt: -1 }});
         //return [{levelCode:"1234"}, {levelCode:"4325"}]
     },
+});
+
+Template.queuedCourse.helpers({
+    isReserved() {
+        return this.status == TicketStates.Reserved;
+    }
 });
 
 Template.submittedCourses.helpers({
@@ -47,32 +65,10 @@ Template.body.events({
         // clear ui
         target.reset();
      
-        var re = /...[- ]?...[- ]?.../;
-        if (!levelCode.match(re)) {
-            sAlert.error("Invalid level code!");
-            return;
-        }
-
-        if (levelStyle == null || levelStyle == "") {
-            sAlert.error("Invalid level style!");
-            return;
-        }
-
         // Insert a task into the collection
-        Tickets.insert({
-          levelCode: levelCode,
-          createdAt: new Date(), // current time
-          coins: 0,
-          createdBy: Meteor.userId(),
-          createdByName: Meteor.user().username,
-          status: TicketStates.InQueue,
-        });
+        Meteor.call('tickets.insert', levelCode, levelStyle, errorHandler('Course submitted!'));
 
-        console.log("Course submitted!");
-        sAlert.success('Course submitted!');
-     
-        // Clear form
-        target.text.value = '';
+        console.log("Course submission sent...");
       },
 });
 
@@ -85,10 +81,7 @@ Template.submittedCourse.events({
             return;
         }
 
-        // Insert a task into the collection
-        Tickets.update(this._id, {
-            $set: { coins: this.coins + 1 },
-        });
+        Meteor.call('tickets.addCoin', this._id, errorHandler());
       },
 });
 
@@ -98,9 +91,12 @@ Template.playCourse.helpers({
             return false;
         }
 
-        console.log(Meteor.user())
+        var userData = Meteor.user();
+        if (userData == null) {
+            return false;
+        }
 
-        let courseId = Meteor.user().reservedCourseId;
+        let courseId = userData.reservedCourseId;
         return courseId != null;
     },
 });

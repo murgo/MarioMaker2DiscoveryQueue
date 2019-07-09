@@ -66,7 +66,7 @@
     
     <template name="queuedCourse">
         <div class="queue-course">
-            <img src="/images/map-blip.png"> <span class="ticket-small">{{levelCode}} <img src="/images/coins-small.png"> {{coins}} </span>
+            {{#if isReserved }} <img src="/images/mario.gif"> {{else}} <img src="/images/map-blip.png"> {{/if}} <span class="ticket-small">{{levelCode}} <img src="/images/coins-small.png"> {{coins}} </span>
         </div>
     </template> 
         
