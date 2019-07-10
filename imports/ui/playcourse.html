@@ -2,7 +2,21 @@
     {{#if hasReservedCourse}}
     <div class="box">
         <h2>Course reserved!</h2>
-        <p>Course ID: <span class="levelCode">{{levelCode}}</span></p>
+        <p>Take your Nintendo Switch, enter the Course ID on the Course World and give the level a good try. Don't forget to like the course if it isn't too hot garbage. Maybe even leave a comment.</p>
+        <p>Course ID: <span class="course-id">{{getReservedCourse.courseId}}</span></p>
+        <p>To verify you actually played the course, please select the style of the course from the dropdown.</p>
+        <form class="course-played">
+            <select name="courseStyle">
+                <option value="skipped">I didn't play it.</option>
+                <option value="course-missing">No course with that Course ID found.</option>
+                <option value="smb1">Super Mario Bros. 1</option>
+                <option value="smb3">Super Mario Bros. 3</option>
+                <option value="smw">Super Mario World</option>
+                <option value="nsmb">New Super Mario Bros.</option>
+                <option value="sm3dw">Super Mario 3D World</option>
+            </select>
+            <input type="submit" name="submit" />
+        </form>
     </div>
     {{else}}
     <div class="box">
