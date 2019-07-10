@@ -8,7 +8,7 @@
 </template> 
 
 <template name="queuedCourse">
-    <div class="queue-course">
-        {{#if isReserved }} <img src="/images/mario.gif"> {{else}} <img src="/images/map-blip.png"> {{/if}} <span class="ticket-small"><span class="levelcode-small">{{levelCode}}</span> <img src="/images/coins-small.png"> {{coins}} </span>
+    <div class="queue-course" title="{{createdAt}}" >
+        {{#if isReserved }} <img src="/images/mario.gif"> {{else}} <img src="/images/map-blip.png"> {{/if}} <span class="ticket-small {{#if isMyOwn}}ticket-owned{{/if}}"><span class="course-id-small">{{courseId}}</span> <img src="/images/coins-small.png"> {{coins}} </span>
     </div>
 </template> 

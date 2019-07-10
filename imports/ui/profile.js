@@ -1,6 +1,4 @@
 import { Template } from 'meteor/templating';
-import { Tickets } from '../api/tickets.js';
-import { Accounts } from 'meteor/accounts-base'
 
 import './profile.html';
 

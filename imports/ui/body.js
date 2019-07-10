@@ -6,4 +6,4 @@ import './submitcourse.js';
 
 Meteor.users.deny({
     update() { return true; }
-})
+});
