@@ -12,6 +12,8 @@ body {
   font-family: 'Super Mario Maker Extended';
   font-weight: normal;
   font-style: normal;
+
+  text-size-adjust: none;
 }
 
 .content {
@@ -92,18 +94,17 @@ h1, h2, h3, h4 {
   padding: 8px;
 }
 
-button, submit {
+button {
   text-align: center;
   border-radius: 10px;
 
   font-family: 'Super Mario Maker Extended';
-  font-weight: normal;
-  font-style: normal;
+  font-size: 16px;
 }
 
 .play-button {
-  width: 200px;
-  height: 100px;
+  width: 340px;
+  height: 150px;
   text-align: center;
   border-radius: 10px;
 
@@ -124,4 +125,8 @@ button, submit {
 
 .course-id {
   background: lightgoldenrodyellow;
+}
+
+input, select {
+  font-size: 16px;
 }
