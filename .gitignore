@@ -1,1 +1,3 @@
 node_modules/
+.deploy/
+server/service-config.js

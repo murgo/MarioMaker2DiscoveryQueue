@@ -1,6 +1,6 @@
 <template name="profile">
     <div class="profile box">
         <h3>Profile</h3>
-        {{> loginButtons align="right"}} {{#if currentUser}} <img src="/images/coins-small.png"> {{coins}} {{/if}}
+        {{> loginButtons align="right"}} {{#if currentUser}} <img src="/images/coins-small.png"> {{ GetCoinAmount }} {{/if}}
     </div>
 </template>

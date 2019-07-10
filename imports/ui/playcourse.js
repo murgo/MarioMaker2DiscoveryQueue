@@ -14,8 +14,8 @@ Template.playCourse.helpers({
             return false;
         }
 
-        let courseId = userData.reservedCourseId;
-        return courseId != null;
+        let reservedTicketId = userData.reservedTicketId;
+        return reservedTicketId != null;
     },
 });
 
@@ -27,5 +27,19 @@ Template.playCourse.events({
         if (!IsLoggedIn(true)) {
             return;
         }
+
+        // Reserve course
+        Meteor.call("tickets.reserveCourse", (err, result) => {
+            if (err) {
+                console.log(err);
+                sAlert.error(err.error);
+            } else {
+                if (result) {
+                    sAlert.success("Course reserved! Go play it!");
+                } else {
+                    sAlert.info("No suitable courses in queue, submit some y'all.");
+                }
+            }
+        });
     },
 });

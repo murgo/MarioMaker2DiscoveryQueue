@@ -1,9 +1,20 @@
 import { Template } from 'meteor/templating';
 import { Tickets, TicketStates } from '../api/tickets.js';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { IsLoggedIn, ErrorHandler } from "./profile.js";
+import { IsLoggedIn } from "./profile.js";
 
 import './submitcourse.html';
+
+export const ErrorHandler = (successText) => {
+    return function(err) {
+        if (err) {
+            console.log(err);
+            sAlert.error(err.error);
+        } else if (successText) {
+            sAlert.success(successText);
+        }
+    };
+}
 
 Template.submitCourse.onCreated(function bodyOnCreated() {
     this.state = new ReactiveDict();

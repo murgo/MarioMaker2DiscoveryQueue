@@ -1,23 +1,30 @@
 import { Template } from 'meteor/templating';
 import { Tickets } from '../api/tickets.js';
+import { Accounts } from 'meteor/accounts-base'
 
 import './profile.html';
-
-export const ErrorHandler = (successText) => {
-    return function(err) {
-        if (err) {
-            console.log(err);
-            sAlert.error(err.error);
-        } else if (successText) {
-            sAlert.success(successText);
-        }
-    };
-}
 
 export const IsLoggedIn = (reportFailure = false) => {
     var loggedIn = (Meteor.userId() != null);
     if (reportFailure && !loggedIn) {
-        sAlert.error('Please log in');
+        sAlert.error('Please sign in first.');
     }
+
     return loggedIn;
 }
+
+Template.profile.helpers({
+    GetCoinAmount() {
+        var user = Meteor.user();
+        if (user == null) {
+            return 0;
+        }
+
+        var coins = user.coins;
+        if (coins == undefined) {
+            return 0;
+        }
+
+        return coins;
+    }
+});

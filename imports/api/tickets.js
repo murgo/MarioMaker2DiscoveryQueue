@@ -22,7 +22,7 @@ Meteor.methods({
 
         var re = /...[- ]?...[- ]?.../;
         if (!levelCode.match(re)) {
-            throw new Meteor.Error('Invalid level code!');
+            throw new Meteor.Error('Invalid Course ID!');
         }
 
         if (levelStyle == null || levelStyle == "") {
@@ -39,7 +39,7 @@ Meteor.methods({
             createdByName: Meteor.user().username,
             status: TicketStates.InQueue,
           });
-   },
+    },
     'tickets.addCoin'(ticketId) {
         check(ticketId, String);
 
@@ -66,5 +66,33 @@ Meteor.methods({
 
         userData.coins = userData.coins - 1;
         Meteor.users.update({_id: Meteor.userId()}, {$set: { 'coins': userData.coins}});
+    },
+    'tickets.reserveCourse'() {
+        if (!Meteor.userId()) {
+            throw new Meteor.Error('Not logged in!');
+        }
+
+        var userData = Meteor.user();
+        if (userData == null) {
+            throw new Meteor.Error('No user found!');
+        }
+
+        var newestTicketArr = Tickets.find({status: TicketStates.InQueue, createdBy: { $ne: Meteor.userId()} }, {sort: { coins: -1, createdAt: -1 }, limit: 1 }).fetch();
+        if (newestTicketArr.length != 1) {
+            return false;
+        }
+
+        var newestTicket = newestTicketArr[0];
+        if (newestTicket == null) {
+            throw new Meteor.Error("null ticket");
+        }
+
+        Tickets.update(newestTicket._id, {
+            $set: { status: TicketStates.Reserved },
+        });
+
+        userData.reservedTicketId = newestTicket._id;
+        Meteor.users.update({_id: Meteor.userId()}, {$set: { reservedTicketId: userData.reservedTicketId}});
+        return true;
     },
 });

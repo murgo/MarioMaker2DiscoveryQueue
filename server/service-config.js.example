@@ -1,0 +1,10 @@
+ServiceConfiguration.configurations.upsert(
+    { service: 'discord' },
+    {
+      $set: {
+        loginStyle: "popup",
+        clientId: "<discordClientId>", 
+        secret: "<discordSecret>"
+      }
+    }
+  );

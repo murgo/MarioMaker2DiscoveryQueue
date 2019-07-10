@@ -4,7 +4,7 @@
         {{#if isSubmitting}}
         <p>
             <form class="new-submit">
-                Level code: <input type="text" name="levelCode" placeholder="ABC-DEF-GHI" /> <br>
+                Course ID: <input type="text" name="levelCode" placeholder="ABC-DEF-GHI" /> <br>
                 Level style (for verification):  <br>
                 <!--
                 <input type="radio" name="levelStyle" value="smb1">Super Mario Bros. 1<br>
@@ -44,7 +44,7 @@
         
 <template name="submittedCourse">
     <div class="submitted-course">
-        <p>Level Code: <span class="levelCode">{{levelCode}}</span></p>
+        <p>Course ID: <span class="levelCode">{{levelCode}}</span></p>
         <p>Coins spent:<img src="/images/coins-small.png"> {{coins}} <button>Spend coin!</button> </p>
     </div>
 </template>
