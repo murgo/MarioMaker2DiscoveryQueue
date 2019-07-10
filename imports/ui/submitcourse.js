@@ -69,6 +69,7 @@ Template.submittedCourses.helpers({
         if (!IsLoggedIn()) {
             return null;
         }
+
         return Tickets.find({createdBy: Meteor.userId()}, {sort: { createdAt: -1 }});
     },
 });

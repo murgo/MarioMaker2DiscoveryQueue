@@ -6,6 +6,10 @@ import { Tickets, TicketStates } from '../tickets.js';
 
 export const ArchivedTickets = new Mongo.Collection('archived-tickets');
 
+Meteor.publish('tickets', function ticketPublication() {
+    return Tickets.find({}, {fields: { '_id': 1, 'courseId': 1, 'createdAt': 1, 'coins': 1, 'status': 1, 'createdBy': 1 }});
+});
+
 Meteor.methods({
     'tickets.insert'(courseId, courseStyle) {
         check(courseId, String);

@@ -7,3 +7,7 @@ import './submitcourse.js';
 Meteor.users.deny({
     update() { return true; }
 });
+
+Template.body.onCreated(function bodyOnCreated() {
+    Meteor.subscribe('tickets');
+});

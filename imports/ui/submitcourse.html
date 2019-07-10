@@ -4,7 +4,7 @@
         {{#if isSubmitting}}
         <p>
             <form class="new-submit">
-                <p>Course ID: <input type="text" name="courseId" placeholder="ABC-DEF-GHI" /></p>
+                <p>Course ID: <input type="text" name="courseId" placeholder="ABC-DEF-GHI" autocomplete="off" /></p>
                 <p>Course style (for verification): 
                 <select name="courseStyle">
                     <option value="">Choose...</option>
@@ -15,7 +15,7 @@
                     <option value="sm3dw">Super Mario 3D World</option>
                 </select>
                 </p>
-                <p><input type="submit" name="submit" /></p>
+                <p><button type="submit" name="submit">Submit</button></p>
             </form>
         </p>
         {{else}}
