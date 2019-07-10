@@ -4,23 +4,18 @@
         {{#if isSubmitting}}
         <p>
             <form class="new-submit">
-                Course ID: <input type="text" name="levelCode" placeholder="ABC-DEF-GHI" /> <br>
-                Level style (for verification):  <br>
-                <!--
-                <input type="radio" name="levelStyle" value="smb1">Super Mario Bros. 1<br>
-                <input type="radio" name="levelStyle" value="smb3">Super Mario Bros. 3<br>
-                <input type="radio" name="levelStyle" value="smw">Super Mario World<br>
-                <input type="radio" name="levelStyle" value="nsmb">New Super Mario Bros.<br>
-                <input type="radio" name="levelStyle" value="sm3dw">Super Mario 3D World<br>
-                -->
-                <select name="levelStyle">
+                <p>Course ID: <input type="text" name="courseId" placeholder="ABC-DEF-GHI" /></p>
+                <p>Course style (for verification): 
+                <select name="courseStyle">
+                    <option value="">Choose...</option>
                     <option value="smb1">Super Mario Bros. 1</option>
                     <option value="smb3">Super Mario Bros. 3</option>
                     <option value="smw">Super Mario World</option>
                     <option value="nsmb">New Super Mario Bros.</option>
                     <option value="sm3dw">Super Mario 3D World</option>
                 </select>
-                <input type="submit" name="submit" />
+                </p>
+                <p><input type="submit" name="submit" /></p>
             </form>
         </p>
         {{else}}
@@ -44,7 +39,10 @@
         
 <template name="submittedCourse">
     <div class="submitted-course">
-        <p>Course ID: <span class="levelCode">{{levelCode}}</span></p>
-        <p>Coins spent:<img src="/images/coins-small.png"> {{coins}} <button>Spend coin!</button> </p>
+        <p>Course ID: <span class="course-id">{{courseId}}</span></p>
+        <p>Coins spent:<img src="/images/coins-small.png"> {{coins}} {{#if canSpendCoin }} <button>Spend coin to bump course up in queue!</button> {{/if}} </p>
+        <p>Status: {{getStatusText}}</p>
+        <p>Result: {{getResultText}}</p>
+        <p>Submitted on: {{createdAt}}</p>
     </div>
 </template>

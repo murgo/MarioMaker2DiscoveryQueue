@@ -27,7 +27,7 @@ Template.submitCourse.helpers({
 });
 
 Template.submitCourse.events({
-    'submit .new-submit'(event) {
+    'submit .new-submit'(event, instance) {
         // Prevent default browser form submit
         event.preventDefault();
      
@@ -38,15 +38,16 @@ Template.submitCourse.events({
 
         // Get value from form element
         const target = event.target;
-        const levelCode = target.levelCode.value;
+        const courseId = target.courseId.value;
 
-        const levelStyle = target.levelStyle.value;
+        const courseStyle = target.courseStyle.value;
 
         // clear ui
         target.reset();
      
         // Insert a task into the collection
-        Meteor.call('tickets.insert', levelCode, levelStyle, ErrorHandler('Course submitted!'));
+        Meteor.call('tickets.insert', courseId, courseStyle, ErrorHandler('Course submitted!'));
+        instance.state.set('showSubmitCourse', false);
 
         console.log("Course submission sent...");
     },
@@ -70,6 +71,37 @@ Template.submittedCourses.helpers({
         }
         return Tickets.find({createdBy: Meteor.userId()}, {sort: { createdAt: -1 }});
     },
+});
+
+Template.submittedCourse.helpers({
+    canSpendCoin() {
+        return (this.status == TicketStates.InQueue && Meteor.user().coins > 0);
+    },
+    getStatusText() {
+        if (this.status == TicketStates.InQueue) {
+            return "In queue";
+        } else if (this.status == TicketStates.Reserved) {
+            return "Reserved for playing";
+        } else if (this.status == TicketStates.Returned) {
+            return "Played";
+        }
+    },
+    getResultText() {
+        var result = "N/A";
+        console.log(this.result);
+
+        if (this.result == "course-missing") {
+            result = "Course missing!"
+        } else if (this.result == "skipped") {
+            result = "Course skipped";
+        } else if (this.result == this.courseStyle) {
+            result = "OK";
+        } else if (this.result) {
+            result = "Player didn't pick correct style";
+        }
+
+        return result;
+    }
 });
 
 Template.submittedCourse.events({
