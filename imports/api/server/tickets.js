@@ -7,7 +7,7 @@ import { Tickets, TicketStates } from '../tickets.js';
 export const ArchivedTickets = new Mongo.Collection('archived-tickets');
 
 Meteor.publish('tickets', function ticketPublication() {
-    return Tickets.find({}, {fields: { '_id': 1, 'courseId': 1, 'createdAt': 1, 'coins': 1, 'status': 1, 'createdBy': 1, 'reservedAt': 1 }});
+    return Tickets.find({}, {fields: { '_id': 1, 'courseId': 1, 'createdAt': 1, 'coins': 1, 'status': 1, 'createdBy': 1, 'result': 1, 'reservedAt': 1 }});
 });
 
 Meteor.methods({
@@ -44,7 +44,8 @@ Meteor.methods({
             createdBy: Meteor.userId(),
             createdByName: Meteor.user().username,
             status: TicketStates.InQueue,
-            reservedAt: null
+            result: null,
+            reservedAt: null,
         });
     },
     'tickets.addCoin'(ticketId) {
