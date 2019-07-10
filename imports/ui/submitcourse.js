@@ -88,7 +88,6 @@ Template.submittedCourse.helpers({
     },
     getResultText() {
         var result = "N/A";
-        console.log(this.result);
 
         if (this.result == "course-missing") {
             result = "Course missing!"
@@ -105,7 +104,7 @@ Template.submittedCourse.helpers({
 });
 
 Template.submittedCourse.events({
-    'click button'(event) {
+    'click .addCoin'(event) {
         // Prevent default browser form submit
         event.preventDefault();
 
@@ -114,5 +113,16 @@ Template.submittedCourse.events({
         }
 
         Meteor.call('tickets.addCoin', this._id, ErrorHandler());
+      },
+
+    'click .removeTicket'(event) {
+        // Prevent default browser form submit
+        event.preventDefault();
+
+        if (!IsLoggedIn(true)) {
+            return;
+        }
+
+        Meteor.call('tickets.archiveTicket', this._id, ErrorHandler());
       },
 });

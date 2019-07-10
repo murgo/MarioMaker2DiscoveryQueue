@@ -4,6 +4,8 @@ import { check } from 'meteor/check';
 
 import { Tickets, TicketStates } from '../tickets.js';
 
+export const ArchivedTickets = new Mongo.Collection('archived-tickets');
+
 Meteor.methods({
     'tickets.insert'(courseId, courseStyle) {
         check(courseId, String);
@@ -38,7 +40,7 @@ Meteor.methods({
             createdBy: Meteor.userId(),
             createdByName: Meteor.user().username,
             status: TicketStates.InQueue,
-          });
+        });
     },
     'tickets.addCoin'(ticketId) {
         check(ticketId, String);
@@ -149,5 +151,28 @@ Meteor.methods({
         Meteor.users.update({_id: Meteor.userId()}, {$set: { reservedTicketId: "", coins: newCoinAmount }});
 
         return addCoinAmount;
+    },
+
+    'tickets.archiveTicket'(id) {
+        if (!Meteor.userId()) {
+            throw new Meteor.Error('Not logged in!');
+        }
+
+        var ticket = Tickets.findOne({_id: id});
+        if (ticket == null) {
+            throw new Meteor.Error('No ticket found!');
+        }
+
+        if (ticket.createdBy != Meteor.userId()) {
+            throw new Meteor.Error('Not own course!');
+        }
+
+        if (ticket.status == TicketStates.Reserved) {
+            throw new Meteor.Error('Cannot remove reserved course!');
+        }
+
+        ticket.archivedAt = new Date();
+        ArchivedTickets.insert(ticket);
+        Tickets.remove({_id: ticket._id});
     },
 });

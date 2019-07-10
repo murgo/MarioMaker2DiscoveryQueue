@@ -40,9 +40,10 @@
 <template name="submittedCourse">
     <div class="submitted-course">
         <p>Course ID: <span class="course-id">{{courseId}}</span></p>
-        <p>Coins spent:<img src="/images/coins-small.png"> {{coins}} {{#if canSpendCoin }} <button>Spend coin to bump course up in queue!</button> {{/if}} </p>
+        <p>Coins spent:<img src="/images/coins-small.png"> {{coins}} {{#if canSpendCoin }} <button class="addCoin">Spend coin to bump course up in queue!</button> {{/if}} </p>
         <p>Status: {{getStatusText}}</p>
         <p>Result: {{getResultText}}</p>
         <p>Submitted on: {{createdAt}}</p>
+        <p><button class="removeTicket">Remove</button></p>
     </div>
 </template>
