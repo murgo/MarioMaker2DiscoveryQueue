@@ -8,7 +8,7 @@ Goal of the project is to make it easier for people to get some plays to new cou
 ## Run on local machine:
 ```
 cd /app/dir/
-meteor
+meteor --settings settings.json
 ```
 
 ## Deploy to server
@@ -28,7 +28,7 @@ mup setup --verbose
 2) Deploy to server
 ```
 cd .deploy
-mup deploy --verbose
+mup deploy --verbose --settings settings.json
 ```
 
 ## Disclaimer
