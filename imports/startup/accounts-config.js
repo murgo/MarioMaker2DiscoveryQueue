@@ -2,7 +2,7 @@ import { Accounts } from 'meteor/accounts-base';
  
 Accounts.ui.config({
     requestPermissions: {
-      discord: ['identify']
+      discord: ['email']
     },
-    passwordSignupFields: 'USERNAME_AND_OPTIONAL_EMAIL',
+    passwordSignupFields: 'USERNAME_AND_EMAIL',
 });
