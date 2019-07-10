@@ -3,7 +3,7 @@ Unofficial Mario Maker 2 Discovery Queue / Level Exchange.
 
 Goal of the project is to make it easier for people to get some plays to new courses and prevent the levels from dying in the no-first-clear graveyard.
 
-Current version running at: https://mariomaker2discoveryqueue.murgo.iki.fi
+Current version running at: https://mariomaker2discoveryqueue.com
 
 ## Running instructions:
 
