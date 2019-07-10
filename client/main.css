@@ -27,7 +27,7 @@ body {
 
 .right {
   flex-grow: 0.25;
-  min-width: 210px;
+  min-width: 230px;
   max-width: 250px;
 }
 
@@ -36,7 +36,7 @@ body {
   border-radius: 15px;
   background: white;
   margin: 10px;
-  padding: 10px;
+  padding: 20px;
   box-shadow: black 5px 5px 0px;
 }
 
@@ -51,7 +51,11 @@ body {
   margin: 2px;
   padding: 4px;
   padding-left: 10px;
-  width: 128px;
+}
+
+.ticket-owned
+{
+  color: gray;
 }
 
 img {
@@ -85,6 +89,7 @@ h1, h2, h3, h4 {
 .right .box {
   border-radius: 8px;
   box-shadow: black 3px 3px 0px;
+  padding: 8px;
 }
 
 .play-button {
@@ -103,7 +108,11 @@ h1, h2, h3, h4 {
   justify-content: center;
 }
 
-.levelcode-small {
+.course-id-small {
   display: inline-block;
-  width: 90px;
+  width: 100px;
+}
+
+.course-id {
+  background: lightgoldenrodyellow;
 }
