@@ -88,19 +88,13 @@ Template.submittedCourse.helpers({
         }
     },
     getResultText() {
-        var result = "N/A";
-
         if (this.result == "course-missing") {
-            result = "Course missing!"
+            return "Reason: Course reported missing";
         } else if (this.result == "skipped") {
-            result = "Course skipped";
-        } else if (this.result == this.courseStyle) {
-            result = "OK";
-        } else if (this.result) {
-            result = "Player didn't pick correct style";
+            return "Reason: Course skipped"
         }
 
-        return result;
+        return "";
     }
 });
 
